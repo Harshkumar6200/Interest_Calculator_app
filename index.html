@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Calculator</title>
+    <style>
+        /* CSS styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #4e54c8, #8f94fb);
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .calculator label {
+            margin-top: 1rem;
+            display: block;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        .calculator input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            background: #ff7f50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #ff4500;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: none;
+        }
+
+        .result p {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Interest Calculator 💰</h1>
+        <p>Calculate your total interest and final amount with ease!</p>
+
+        <div class="calculator">
+            <label for="amount">Principle Amount (₹):</label>
+            <input type="number" id="amount" placeholder="Enter amount" min="0">
+
+            <label for="duration">Time Duration (Months):</label>
+            <input type="number" id="duration" placeholder="Enter duration" min="1">
+
+            <label for="percentage">Interest Rate (%):</label>
+            <input type="number" id="percentage" placeholder="Enter interest rate" step="0.1" min="0">
+
+            <button id="calculateBtn" onclick="calculateInterest()">Calculate Interest</button>
+
+            <div id="result" class="result">
+                <!-- Result will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for calculating interest
+        function calculateInterest() {
+            // Get input values
+            const amount = document.getElementById("amount").value;
+            const duration = document.getElementById("duration").value;
+            const percentage = document.getElementById("percentage").value;
+
+            // Validate inputs
+            if (!amount || !duration || !percentage) {
+                alert("Please fill all fields!");
+                return;
+            }
+
+            // Calculate interest
+            const interest = ((amount / 100) * percentage) * duration;
+            const total = parseFloat(amount) + interest;
+
+            // Display results
+            const resultDiv = document.getElementById("result");
+            resultDiv.style.display = "block";
+            resultDiv.innerHTML = `
+                <p><strong>Principle Amount:</strong> ₹${amount}</p>
+                <p><strong>Time Duration:</strong> ${duration} months</p>
+                <p><strong>Interest Rate:</strong> ${percentage}%</p>
+                <p><strong>Total Interest Amount:</strong> ₹${interest.toFixed(2)}</p>
+                <p><strong>Total Payment:</strong> ₹${total.toFixed(2)}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
